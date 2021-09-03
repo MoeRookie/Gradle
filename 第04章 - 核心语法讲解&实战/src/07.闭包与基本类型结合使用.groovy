@@ -15,7 +15,7 @@ int fab(int number){
 
 int fab2(int number){
     int result = 1
-    number.downto(1){ // 闭包可以写在方法外(实际上, 通常也是这种写法)
+    number.downto(1){ // 如果闭包是方法参数的最后一个,那么它就可以写在方法外(实际上, 通常也是这种写法)
         num -> result *= num
     }
     return result
