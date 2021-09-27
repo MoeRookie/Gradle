@@ -1,6 +1,0 @@
-include ':app', ':vuandroidadsdk'
-include ':lib_pullalive'
-if (hasProperty('isLoadTest') ? isLoadTest.toBoolean() : false) {
-  include ':Test'
-}
-
