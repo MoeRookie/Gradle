@@ -1,0 +1,75 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:4.0.0"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+/** project相关api讲解
+ * 注*: 执行任一task都会使得所有project的build.gradle配置中的方法或者代码得到执行
+ *      使用 gradlew clean 命令执行 clean 这个task完全是因为这个task最简单、执行的最快
+ *      当前build.gradle文件中所有的方法和代码都是在生命周期的配置过程中执行的
+ **/
+// this.getAllProjectsTest() => 获取所有的project
+// this.getSubProjectsTest() ==> 获取当前project的所有子project
+// this.getParentProjectTest() ==> 获取当前project的父project
+// --> 获取根project
+this.getRootProjectTest()
+
+/** 获取所有的project
+ **/
+def getAllProjectsTest(){
+    println '--------------------------'
+    println 'Root Project'
+    println '--------------------------'
+    this.getAllprojects().eachWithIndex { Project project, int index ->
+        if (0 == index) {
+            println "Root project :'${project.name}'"
+        }else{
+            println "+--- project :'${project.name}'"
+        }
+    }
+}
+
+/** 获取当前project的所有子project
+ **/
+def getSubProjectsTest(){
+    println '--------------------------'
+    println 'Sub Project'
+    println '--------------------------'
+    this.getSubprojects().eachWithIndex { Project project, int index ->
+        println "+--- project :'${project.name}'"
+    }
+}
+
+/** 获取当前project的父project(的名称)
+ **/
+def getParentProjectTest(){
+    // def name = this.getParent().name
+    // println "the parent project name is: ${name}"
+}
+
+/** 获取根project
+ **/
+def getRootProjectTest(){
+    def name = this.getRootProject().name
+    println "the root project name is: ${name}"
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
